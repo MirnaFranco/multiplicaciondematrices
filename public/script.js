@@ -64,14 +64,21 @@ function getMatrixValues(containerId) {
         let row = [];
         const inputs = rows[i].children;
         for (let j = 0; j < inputs.length; j++) {
-            let value = parseFloat(inputs[j].value);
-            if (isNaN(value)) return null;
+            const input = inputs[j];
+            const value = parseFloat(input.value);
+            if (isNaN(value)) {
+                input.style.border = "2px solid red"; // Marcar error
+                return null;
+            } else {
+                input.style.border = ""; // Reset border si es válido
+            }
             row.push(value);
         }
         matrix.push(row);
     }
     return matrix;
 }
+
 
 function displayResult(result) {
     const container = document.getElementById("result");
